@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\House;
-use App\Models\Landlord;
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
