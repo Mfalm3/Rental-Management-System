@@ -18,7 +18,7 @@ class LandlordRegistrationTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_landlord_registration()
     {
         $response = $this->json('POST','/register',[
             'name' => $this->faker->name,
@@ -38,6 +38,6 @@ class LandlordRegistrationTest extends TestCase
 
         $this->assertNotNull($user);
         $this->assertNotNull($landlord);
-        $this->assertEquals($user->name, $landlord->user->name);
+        $this->assertEquals($user->name, $landlord->info->name);
     }
 }
