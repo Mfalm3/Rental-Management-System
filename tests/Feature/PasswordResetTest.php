@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class PasswordResetTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, ProvidesUtils;
 
     public function test_reset_password_link_screen_can_be_rendered()
     {
@@ -23,6 +23,7 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
+        $this->build_a_house();
         $user = User::factory()->create();
 
         $this->post('/forgot-password', ['email' => $user->email]);
@@ -34,6 +35,7 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
+        $this->build_a_house();
         $user = User::factory()->create();
 
         $this->post('/forgot-password', ['email' => $user->email]);
@@ -51,6 +53,7 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
+        $this->build_a_house();
         $user = User::factory()->create();
 
         $this->post('/forgot-password', ['email' => $user->email]);

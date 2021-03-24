@@ -12,10 +12,11 @@ use Tests\TestCase;
 
 class EmailVerificationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, ProvidesUtils;
 
     public function test_email_verification_screen_can_be_rendered()
     {
+        $this->build_a_house();
         $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
@@ -28,7 +29,7 @@ class EmailVerificationTest extends TestCase
     public function test_email_can_be_verified()
     {
         Event::fake();
-
+        $this->build_a_house();
         $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
@@ -48,6 +49,7 @@ class EmailVerificationTest extends TestCase
 
     public function test_email_is_not_verified_with_invalid_hash()
     {
+        $this->build_a_house();
         $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
