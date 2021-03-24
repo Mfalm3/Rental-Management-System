@@ -1,0 +1,4 @@
+.hero{
+    background: white url("../img/hero.jpg") no-repeat scroll center;
+    background-size: cover;
+}

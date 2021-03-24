@@ -18,7 +18,7 @@ use App\Models\House;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 
