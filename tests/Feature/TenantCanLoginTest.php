@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\House;
 use App\Models\Landlord;
+use App\Models\Property;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -54,11 +55,16 @@ class TenantCanLoginTest extends TestCase
     public function build_a_house()
     {
 
-        $this->landlord = Landlord::factory(1)->create()->first();
+        $landlord = Landlord::factory(1)->create()->first();
 
-        $this->house = House::factory([
-            'landlord_id'=> $this->landlord->id,
-            'house_number' => 'B1'
+        $property = Property::factory([
+            'landlord_id'=> $landlord->id,
         ])->create()->first();
+
+        $this->house = House::factory()->create([
+            'property_id' => $property->id,
+            'house_number' => 'B1'
+        ]);
+
     }
 }
