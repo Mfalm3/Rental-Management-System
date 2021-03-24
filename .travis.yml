@@ -1,4 +1,4 @@
-dist: focal
+dist: xenial
 language: php
 php:
   - 7.4
@@ -19,7 +19,7 @@ script:
 services:
   - postgresql
 addons:
-  postgresql: 11
+  postgresql: 10
 
 notifications:
   email: false
