@@ -32260,6 +32260,11 @@ select {
           animation: bounce 1s infinite;
 }
 
+.hero{
+  background: white url("../img/hero.jpg") no-repeat scroll center;
+  background-size: cover;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
