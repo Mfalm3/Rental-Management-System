@@ -23,7 +23,7 @@ class PropertyRegistrationTest extends TestCase
         $this->withoutExceptionHandling();
         $this->create_landlord();
 
-        $response = $this->post('/property',[
+        $response = $this->post('/properties',[
             'name' => 'Victoria Court',
             'location' => 'Kingslanding',
             'account_number' => Str::random(12),
@@ -35,9 +35,7 @@ class PropertyRegistrationTest extends TestCase
     }
     public function create_landlord(){
 
-        $user = User::factory()->for(
-            Landlord::factory(), 'typeable'
-        )->create();
+        $user = User::factory()->userType('landlord')->create();
         $this->landlord = $user->typeable;
     }
 }

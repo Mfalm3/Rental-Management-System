@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\House;
-use App\Models\Landlord;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,7 +10,7 @@ use Tests\TestCase;
 
 class TenantCanLoginTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker, ProvidesUtils;
 
     protected $landlord, $house;
     /**
@@ -49,16 +47,5 @@ class TenantCanLoginTest extends TestCase
        // $this->assertEquals('B1', $user->house->house_number);
 
         $response->assertStatus(302);
-    }
-
-    public function build_a_house()
-    {
-
-        $this->landlord = Landlord::factory(1)->create()->first();
-
-        $this->house = House::factory([
-            'landlord_id'=> $this->landlord->id,
-            'house_number' => 'B1'
-        ])->create()->first();
     }
 }

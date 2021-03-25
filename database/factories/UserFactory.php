@@ -26,7 +26,8 @@ class UserFactory extends Factory
     public function definition()
     {
 
-        $type = "\\App\\Models\\".ucfirst(self::$type);
+        $userType = self::$type ?? 'tenant';
+        $type = "\\App\\Models\\".ucfirst($userType);
         $typeable = $type::factory()->create()->first();
 
         return [

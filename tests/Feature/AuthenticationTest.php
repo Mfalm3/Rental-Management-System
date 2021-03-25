@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, ProvidesUtils;
 
     public function test_login_screen_can_be_rendered()
     {
@@ -20,6 +20,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
+        $this->build_a_house();
         $user = User::factory()->create();
 
         $response = $this->post('/login', [
@@ -33,6 +34,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_not_authenticate_with_invalid_password()
     {
+        $this->build_a_house();
         $user = User::factory()->create();
 
         $this->post('/login', [
