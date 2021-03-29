@@ -3,8 +3,10 @@
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TenantController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Models\House;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,10 @@ use App\Models\House;
 | contains the "web" middleware group. Now create something great!
 |
 */
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
 
 Route::get('/', function () {
     return view('landing');
