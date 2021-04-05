@@ -36,18 +36,7 @@ Route::resource('properties',PropertyController::class);
 
 
 Route::get('/dashboard', function () {
-    $type = explode('\\',auth()->user()->typeable_type,3)[2];
-
-    switch ($type):
-        case 'Tenant':
-            return view('users.tenant.index');
-        case 'Landlord':
-            return view('users.landlord.index');
-        case 'Agent':
-            return view('users.agent.index');
-        default:
-            return view('dashboard');
-    endswitch;
+    return view('layouts.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

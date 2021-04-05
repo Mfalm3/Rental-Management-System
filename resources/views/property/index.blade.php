@@ -2,6 +2,5 @@
 
 @section('dash-content')
 
-    @include('layouts.panels.landlord-panel')
 
 @endsection
