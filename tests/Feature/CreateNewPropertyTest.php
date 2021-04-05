@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Property;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -17,8 +18,11 @@ class CreateNewPropertyTest extends TestCase
      */
     public function test_create_new_property()
     {
-        $response = $this->post('/property',[
-            'landlord_id' => 1,
+        $this->withoutExceptionHandling();
+        $user = User::factory(1)->userType('Landlord')->create()->first();
+
+        $response = $this->post('/properties',[
+            'landlord_id' => $user->id,
             'name' => $this->faker->name,
             'location' => $this->faker->address,
             'account_number' => $this->faker->bankAccountNumber

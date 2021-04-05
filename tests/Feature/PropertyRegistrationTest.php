@@ -31,7 +31,7 @@ class PropertyRegistrationTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        $response->assertSee('created property');
+        $response->assertSessionHas('message','Created new property');
     }
     public function create_landlord(){
 
