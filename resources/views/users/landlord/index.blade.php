@@ -1,8 +1,5 @@
-@extends('layouts.app')
-@php
-  $header = 'Landlord Dashboard';
-@endphp
-@section('dash-content')
-@include('layouts.panels.landlord-panel')
+@extends('layouts.dashboard')
 
+@section('dash-content')
+<div class="absolute bottom-0 text-center">ABC</div>
 @endsection
