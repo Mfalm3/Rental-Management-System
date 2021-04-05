@@ -18,7 +18,6 @@ class CreateNewPropertyTest extends TestCase
      */
     public function test_create_new_property()
     {
-        $this->withoutExceptionHandling();
         $user = User::factory(1)->userType('Landlord')->create()->first();
 
         $response = $this->post('/properties',[
@@ -33,5 +32,20 @@ class CreateNewPropertyTest extends TestCase
         $property = Property::first();
 
         $this->assertNotNull($property);
+    }
+
+    public function test_create_property_with_missing_details()
+    {
+        $user = User::factory(1)->userType('Landlord')->create()->first();
+
+        $response = $this->post('/properties',[
+            'landlord_id' => $user->id,
+            'name' => '',
+            'location' => $this->faker->address,
+            'account_number' => $this->faker->bankAccountNumber
+        ]);
+
+        $response->assertSessionHasErrors('name');
+        $response->assertSessionHasErrors(['name'=>'The name field is required.']);
     }
 }
