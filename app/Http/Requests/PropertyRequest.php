@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Property;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PropertyRequest extends FormRequest
@@ -13,7 +14,7 @@ class PropertyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,14 @@ class PropertyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'landlord_id' => 'required|int',
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
         ];
+    }
+
+    public function save()
+    {
+       return Property::create($this->request->all());
     }
 }
