@@ -7,6 +7,8 @@ namespace Tests\Feature;
 use App\Models\House;
 use App\Models\Landlord;
 use App\Models\Property;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 trait ProvidesUtils
 {
@@ -25,5 +27,10 @@ trait ProvidesUtils
             'house_number' => 'B1'
         ]);
 
+    }
+
+    public function create_a_user()
+    {
+        return User::factory()->userType('landlord')->create()->first();
     }
 }

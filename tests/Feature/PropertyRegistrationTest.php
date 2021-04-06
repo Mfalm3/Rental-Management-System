@@ -22,8 +22,9 @@ class PropertyRegistrationTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $this->create_landlord();
+        $user = User::first();
 
-        $response = $this->post('/properties',[
+        $response = $this->actingAs($user, 'web')->post('/properties',[
             'name' => 'Victoria Court',
             'location' => 'Kingslanding',
             'account_number' => Str::random(12),

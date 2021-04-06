@@ -6,11 +6,12 @@ use App\Models\Property;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CreateNewPropertyTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker, ProvidesUtils;
     /**
      * A basic feature test example.
      *
@@ -18,9 +19,9 @@ class CreateNewPropertyTest extends TestCase
      */
     public function test_create_new_property()
     {
-        $user = User::factory(1)->userType('Landlord')->create()->first();
+        $user = $this->create_a_user();
 
-        $response = $this->post('/properties',[
+        $response = $this->actingAs($user,'web')->post('/properties',[
             'landlord_id' => $user->id,
             'name' => $this->faker->name,
             'location' => $this->faker->address,
@@ -36,9 +37,9 @@ class CreateNewPropertyTest extends TestCase
 
     public function test_create_property_with_missing_details()
     {
-        $user = User::factory(1)->userType('Landlord')->create()->first();
+        $user = $this->create_a_user();
 
-        $response = $this->post('/properties',[
+        $response = $this->actingAs($user,'web')->post('/properties',[
             'landlord_id' => $user->id,
             'name' => '',
             'location' => $this->faker->address,
@@ -47,5 +48,15 @@ class CreateNewPropertyTest extends TestCase
 
         $response->assertSessionHasErrors('name');
         $response->assertSessionHasErrors(['name'=>'The name field is required.']);
+    }
+
+    public function test_see_property_creation_form()
+    {
+        $user = $this->create_a_user();
+
+        $response = $this->actingAs($user,'web')->get('/properties/create');
+
+        $response->assertSee('Add new property');
+        $response->assertStatus(200);
     }
 }
