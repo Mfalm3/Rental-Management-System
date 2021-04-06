@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PropertyRequest;
+use App\Models\Landlord;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        $owners = Landlord::all();
+        return view('property.create', compact('owners'));
     }
 
     /**
