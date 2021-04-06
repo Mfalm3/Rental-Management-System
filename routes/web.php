@@ -27,12 +27,14 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::middleware(['auth'])->group(function (){
+    Route::resource('properties',PropertyController::class);
+});
+
 
 Route::get('users', [UsersController::class, 'index']);
 Route::get('users/create', [UsersController::class, 'create']);
 Route::post('users/create', [UsersController::class, 'store']);
-
-Route::resource('properties',PropertyController::class);
 
 
 Route::get('/dashboard', function () {
