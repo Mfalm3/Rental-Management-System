@@ -24,7 +24,14 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="a1848432-c3c8-4a1b-9d9a-f2e9f6e6ad3f">
+        <schema name="main" object-types="table, view" />
+      </connection>
+      <connection connection-id="098249e7-d794-4ab6-8350-1ef31f142724">
+        <schema name="main" object-types="table, index, view, constraint, dataset trigger, column" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="a1848432-c3c8-4a1b-9d9a-f2e9f6e6ad3f">
@@ -42,6 +49,11 @@
     <connection id="098249e7-d794-4ab6-8350-1ef31f142724" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="098249e7-d794-4ab6-8350-1ef31f142724" dataset="main.properties" active-filter-id="EMPTY_FILTER">
+      <filter id="8dc8481a-1c63-4425-9d5b-5ef847d0ea11" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="1" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="a1848432-c3c8-4a1b-9d9a-f2e9f6e6ad3f" dataset="main.users" active-filter-id="edee5c40-61df-45f3-b0a6-554b622427f6">
       <filter id="edee5c40-61df-45f3-b0a6-554b622427f6" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="1" active="true" />
