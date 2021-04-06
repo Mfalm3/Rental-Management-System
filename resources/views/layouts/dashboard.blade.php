@@ -12,7 +12,7 @@
 
         </x-sidebar>
 
-        <div id="content">
+        <div id="content" class="flex-1 md:mt-16">
             @yield('dash-content')
         </div>
 
