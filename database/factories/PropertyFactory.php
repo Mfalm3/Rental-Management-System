@@ -27,6 +27,7 @@ class PropertyFactory extends Factory
 
         return [
             'landlord_id' => $landlord->id,
+            'uuid' => $this->faker->uuid,
             'name' => $this->faker->name.' '.$suffix[array_rand($suffix)],
             'location' => $this->faker->address,
             'account_number' => $this->faker->bankAccountNumber()

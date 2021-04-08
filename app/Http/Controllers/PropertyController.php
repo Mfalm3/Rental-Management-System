@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PropertyRequest;
+use App\Models\Landlord;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('property.index');
+        $properties = Property::all();
+        return view('property.index', compact('properties'));
     }
 
     /**
@@ -24,19 +27,20 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        $owners = Landlord::all();
+        return view('property.create', compact('owners'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PropertyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropertyRequest $request)
     {
-        Property::create($request->all());
-        return response()->json('created property',201);
+        $request->save();
+        return redirect('/properties', 201)->with(['message'=> 'Created new property']);
     }
 
     /**
@@ -45,9 +49,9 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Property $property)
     {
-        //
+        return view('property.show', compact('property '));
     }
 
     /**

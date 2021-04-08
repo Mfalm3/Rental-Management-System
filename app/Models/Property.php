@@ -9,11 +9,20 @@ class Property extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['landlord_id','name','location','account_number'];
+    protected $fillable = ['uuid','landlord_id','name','location','account_number'];
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     public function proprietor()
     {
-        return $this->belongsTo(Landlord::class);
+        return $this->belongsTo(Landlord::class,'landlord_id');
     }
 
     public function houses()

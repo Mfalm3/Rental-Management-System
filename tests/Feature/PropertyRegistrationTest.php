@@ -22,8 +22,9 @@ class PropertyRegistrationTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $this->create_landlord();
+        $user = User::first();
 
-        $response = $this->post('/properties',[
+        $response = $this->actingAs($user, 'web')->post('/properties',[
             'name' => 'Victoria Court',
             'location' => 'Kingslanding',
             'account_number' => Str::random(12),
@@ -31,7 +32,7 @@ class PropertyRegistrationTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        $response->assertSee('created property');
+        $response->assertSessionHas('message','Created new property');
     }
     public function create_landlord(){
 
