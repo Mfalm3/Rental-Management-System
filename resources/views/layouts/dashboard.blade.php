@@ -9,10 +9,9 @@
             <x-sidebar-item to="#" color="purple" segment="report" fontawesome="fas fa-chart-pie">Reports</x-sidebar-item>
             <x-sidebar-item to="#" color="red" segment="users" fontawesome="fas fa-cog">Manage Users</x-sidebar-item>
             <x-sidebar-item to="#" color="green" segment="ui" fontawesome="fas fa-file">Statement</x-sidebar-item>
-
         </x-sidebar>
 
-        <div id="content" class="flex-1 md:mt-16">
+        <div id="content" class="flex-1 md:mt-16 pb-24 md:pb-5">
             @yield('dash-content')
         </div>
 

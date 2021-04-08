@@ -15,7 +15,7 @@ $fa = (request()->segment(1) == $segment)
 : ""
 @endphp
 
-<li class="mr-3 sm:mt-2 sm:mr-0 sm:text-left sm:px-8">
+<li class="mr-3 flex-1 md:px-8">
     <a href="{{ $to }}" {{ $attributes->merge(['class'=> $link]) }}>
         <i class="{{ $fontawesome }} pr-0 md:pr-3" {{ $attributes->merge(['class'=>$fa]) }}></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">{{$slot}}</span>
     </a>

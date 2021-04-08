@@ -1,7 +1,8 @@
-<div class="w-full h-full md:h-screen md:z-0 z-20 fixed bottom-0 sm:w-1/6 bg-gray-900 sm:min-h-screen">
+<div class="bg-gray-900 w-full h-16 fixed bottom-0 mt-12 md:relative md:h-auto z-10 md:w-56">
 
-    <ul class="sm:mt-32 xs:text-lg text-sm text-white text-center flex justify-around sm:justify-center pt-2 sm:flex-col">
-        {{ $slot }}
-    </ul>
-
+    <div class="bg-gray-900 md:mt-12 xs:w-56 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
+        <ul class="flex flex-row list-reset md:flex-col md:mt-16 xs:text-lg text-sm text-white text-center">
+            {{ $slot }}
+        </ul>
+    </div>
 </div>
