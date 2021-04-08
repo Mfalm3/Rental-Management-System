@@ -9,7 +9,7 @@ class Property extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['landlord_id','name','location','account_number'];
+    protected $fillable = ['uuid','landlord_id','name','location','account_number'];
 
     public function proprietor()
     {

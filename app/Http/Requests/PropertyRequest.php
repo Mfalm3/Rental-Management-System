@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Property;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class PropertyRequest extends FormRequest
 {
@@ -33,6 +34,8 @@ class PropertyRequest extends FormRequest
 
     public function save()
     {
-       return Property::create($this->request->all());
+        $uuid = (string) Str::uuid();
+        $data = [ $uuid,...$this->request->all()];
+       return Property::create(data);
     }
 }
