@@ -35,7 +35,7 @@ class PropertyRequest extends FormRequest
     public function save()
     {
         $uuid = (string) Str::uuid();
-        $data = [ $uuid,...$this->request->all()];
-       return Property::create(data);
+
+       return Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
     }
 }
