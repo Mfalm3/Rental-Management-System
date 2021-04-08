@@ -2,3 +2,10 @@
     background: white url("../img/hero.jpg") no-repeat scroll center;
     background-size: cover;
 }
+
+.c-card img {
+    transition: transform 0.3s ease-in-out;
+}
+.c-card:hover img {
+    transform: scale(1.05);
+}
