@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Auth;
 trait ProvidesUtils
 {
 
-    public function build_a_house()
+    public function build_a_house($count=1)
     {
 
-        $landlord = Landlord::factory(1)->create()->first();
+        $landlord = User::factory()->userType('landlord')->count(1)->create()->first();
 
         $property = Property::factory([
             'landlord_id'=> $landlord->id,
-        ])->create()->first();
+        ])->count($count)->create()->first();
 
         $this->house = House::factory()->create([
             'property_id' => $property->id,
