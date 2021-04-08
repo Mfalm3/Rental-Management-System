@@ -1,6 +1,6 @@
 @props(['name', 'location','property'])
 <div class="w-full sm:w-1/2 md:w-72 xl:w-1/4 p-4">
-    <a href="{{ $property }}" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+    <a href="properties/{{ $property }}" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-48 overflow-hidden">
             <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="">
         </div>
