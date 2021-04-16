@@ -63,7 +63,7 @@ class PropertyRequest extends FormRequest
                 $links[] = ['url' => $upload_response['secure_url']];
             }
         }
-//dd($links);
+
         $property =  Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
         $property->images()->createMany($links);
     }
