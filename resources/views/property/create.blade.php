@@ -9,7 +9,7 @@
         <hr class="mb-3">
 
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-        <form method="POST" action="/properties">
+        <form method="POST" action="/properties" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <x-label for="name" :value="__('Property Name')" />
@@ -35,6 +35,10 @@
                         <option value="{{ $owner->id }}">{{ $owner->info->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="mb-3">
+                <x-label for="image" :value="__('Image files')"></x-label>
+                <x-input type="file" name="images[]" multiple/>
             </div>
             <div class="mt-4 float-right">
                 <x-button>Submit</x-button>
