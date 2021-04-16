@@ -49,13 +49,16 @@ class PropertyRequest extends FormRequest
                 $fileNameToStore[$i] = Str::of($fileName)->slug()->append($i+1);
 
                 try {
+                    session(['message' => 'Uploading images']);
                     $upload_responses[] = $cloudinary->uploadApi()->upload($images[$i]->getRealPath(),[
                         'folder' => 'rms',
                         'use_filename' => true,
                         'public_id' => $fileNameToStore[$i]
                     ])->getArrayCopy();
+
+                    session(['message' => 'Upload successful']);
                 } catch (ApiError $e) {
-                    echo $e;
+                    session(['error' => $e->getMessage()]);
                 }
 
             }
@@ -66,5 +69,6 @@ class PropertyRequest extends FormRequest
 
         $property =  Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
         $property->images()->createMany($links);
+        session(['message' => 'Property created successfully']);
     }
 }
