@@ -10,11 +10,13 @@
     </div>
 
     <div class="flex flex-wrap justify-center">
+
         @foreach($properties as $property)
             <x-listing-card
-                name="{{ $property->name }}"
-                location="{{ $property->location }}"
-                property="{{ $property->uuid }}"/>
+                    name="{{$property->name}}"
+                    location="{{$property->location}}"
+                    property="{{$property}}"
+                    :images="$property->images"></x-listing-card>
         @endforeach
     </div>
 @endsection
