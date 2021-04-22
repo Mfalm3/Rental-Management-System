@@ -20,6 +20,11 @@ class Property extends Model
         return 'uuid';
     }
 
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable')->select(['id','url']);
+    }
+
     public function proprietor()
     {
         return $this->belongsTo(Landlord::class,'landlord_id');

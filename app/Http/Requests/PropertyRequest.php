@@ -3,8 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Models\Property;
+use Cloudinary\Api\Exception\ApiError;
+use Cloudinary\Cloudinary;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Cloudinary\Api\Upload\UploadApi;
 
 class PropertyRequest extends FormRequest
 {
@@ -36,6 +39,38 @@ class PropertyRequest extends FormRequest
     {
         $uuid = (string) Str::uuid();
 
-       return Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
+        $property =  Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
+        if($this->hasFile('images')){
+            $images = $this->file('images');
+
+            $cloudinary = app()->make(Cloudinary::class);
+
+            $fileName = $this->request->get('name');
+
+            for($i=0; $i < count($images); $i++){
+                $fileNameToStore[$i] = Str::of($fileName)->slug()->append($i+1);
+
+                try {
+                    session(['message' => 'Uploading images']);
+                    $upload_responses[] = $cloudinary->uploadApi()->upload($images[$i]->getRealPath(),[
+                        'folder' => 'rms',
+                        'use_filename' => true,
+                        'public_id' => $fileNameToStore[$i]
+                    ])->getArrayCopy();
+
+                    session(['message' => 'Upload successful']);
+                } catch (ApiError $e) {
+                    session(['error' => $e->getMessage()]);
+                }
+
+            }
+            foreach ($upload_responses as $upload_response){
+                $links[] = ['url' => $upload_response['secure_url']];
+            }
+            $property->images()->createMany($links);
+        }
+
+
+        session(['message' => 'Property created successfully']);
     }
 }
