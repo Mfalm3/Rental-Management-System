@@ -38,6 +38,8 @@ class PropertyRequest extends FormRequest
     public function save()
     {
         $uuid = (string) Str::uuid();
+
+        $property =  Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
         if($this->hasFile('images')){
             $images = $this->file('images');
 
@@ -65,10 +67,10 @@ class PropertyRequest extends FormRequest
             foreach ($upload_responses as $upload_response){
                 $links[] = ['url' => $upload_response['secure_url']];
             }
+            $property->images()->createMany($links);
         }
 
-        $property =  Property::create(array_merge($this->request->all(), ['uuid'=>$uuid]));
-        $property->images()->createMany($links);
+
         session(['message' => 'Property created successfully']);
     }
 }
