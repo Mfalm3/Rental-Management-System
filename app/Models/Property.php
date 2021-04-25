@@ -34,4 +34,9 @@ class Property extends Model
     {
         return $this->hasMany(House::class);
     }
+
+    public function resolveRouteBinding($value, $field= null)
+    {
+        return $this::where('uuid', $value)->firstOrFail();
+    }
 }
