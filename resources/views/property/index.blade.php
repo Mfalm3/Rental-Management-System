@@ -15,7 +15,7 @@
             <x-listing-card
                     name="{{$property->name}}"
                     location="{{$property->location}}"
-                    property="{{$property}}"
+                    :property="$property"
                     :images="$property->images"></x-listing-card>
         @endforeach
     </div>

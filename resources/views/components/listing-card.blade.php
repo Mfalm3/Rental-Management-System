@@ -6,7 +6,7 @@
             <x-imagecard :album="$images"></x-imagecard>
 {{--            <img class="absolute inset-0 h-full w-full object-cover" src="{{ $img ?? asset('img/default_image.png') }}" alt="Property Image">--}}
         </div>
-        <a href="properties/{{ $property }}" class="p-4 block">
+        <a href="properties/{{ $property['uuid']}}" class="p-4 block">
             <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
             <h2 class="mt-2 mb-2  font-bold">{{ $name }}</h2>
         </a>
