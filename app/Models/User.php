@@ -59,4 +59,8 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('typeable_type', $type);;
+    }
 }
