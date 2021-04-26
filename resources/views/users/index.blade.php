@@ -30,29 +30,29 @@
                     </button>
                 </nav>
             </div>
-            <div id="panels">
-                <div class="tenant-panel tab-content active py-5 bg-white">
+            <div id="panels" class="bg-white">
+                <div class="tenant-panel tab-content active py-1">
                     @if($landlords->count() > 0)
                         @foreach($tenants as $tenant)
-                            <li>{{ $tenant->name }}</li>
+                            <x-list-item>{{ $tenant->name }}</x-list-item>
                         @endforeach
                     @else
                         <li>No Agent registered</li>
                     @endif
                 </div>
-                <div class="landlord-panel tab-content py-5 bg-white">
+                <div class="landlord-panel tab-content py-1">
                     @if($landlords->count() > 0)
                         @foreach($landlords as $landlord)
-                            <li>{{ $landlord->name }}</li>
+                            <x-list-item>{{ $landlord->name }}</x-list-item>
                         @endforeach
                     @else
                         <li>No Landlord registered</li>
                     @endif
                 </div>
-                <div class="agent-panel tab-content py-5 bg-white">
+                <div class="agent-panel tab-content py-1">
                     @if($agents->count() > 0)
                         @foreach($agents as $agent)
-                            <li>{{ $agent->name }}</li>
+                            <x-list-item>{{ $agent->name }}</x-list-item>
                         @endforeach
                     @else
                         <li>No Agent registered</li>
