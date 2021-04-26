@@ -29,10 +29,6 @@ class LandlordRegistrationTest extends TestCase
             'contacts' => '0712345678'
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertStatus(302);
-        $response->assertRedirect(RouteServiceProvider::HOME);
-
         $user = User::first();
         $landlord = Landlord::first();
 

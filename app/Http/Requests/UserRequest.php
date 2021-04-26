@@ -67,7 +67,7 @@ class UserRequest extends FormRequest
             'typeable_id'   => $typeable->id,
             'typeable_type' => get_class($typeable)
         ]);
-        Auth::login($user);
+
         event(new Registered($user));
 
     }
