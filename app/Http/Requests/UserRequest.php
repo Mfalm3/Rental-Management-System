@@ -65,7 +65,7 @@ class UserRequest extends FormRequest
             'email' => $this->request->get('email'),
             'password' => Hash::make($this->request->get('password')),
             'typeable_id'   => $typeable->id,
-            'typeable_type' => get_class($typeable)
+            'typeable_type' => $this->request->get('type')
         ]);
 
         event(new Registered($user));
