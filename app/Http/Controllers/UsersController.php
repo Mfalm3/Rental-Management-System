@@ -15,8 +15,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $tenants = User::ofType("tenant")->get();
+        $landlords = User::ofType("landlord")->get();
+        $agents = User::ofType("agent")->get();
+        return view('users.index', compact('tenants', 'landlords','agents'));
     }
 
     /**
