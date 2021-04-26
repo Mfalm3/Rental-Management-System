@@ -16,3 +16,7 @@
 .tab-content.active {
     display: block;
 }
+
+.tab.active{
+    @apply border-b-2 border-blue-700 text-blue-500 font-medium;
+}
