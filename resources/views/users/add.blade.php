@@ -1,8 +1,6 @@
-@extends('layouts.app')
-@php
-  $header = 'Add New Users';
-@endphp
-@section('content')
+@extends('layouts.dashboard')
+
+@section('dash-content')
 <x-auth-card>
     <x-slot name="logo"></x-slot>
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
