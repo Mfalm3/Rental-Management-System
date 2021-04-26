@@ -33,8 +33,8 @@ Route::middleware(['auth'])->group(function (){
 
 
 Route::get('users', [UsersController::class, 'index']);
-Route::get('users/create', [UsersController::class, 'create']);
-Route::post('users/create', [UsersController::class, 'store']);
+Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
+Route::post('users/create', [UsersController::class, 'store'])->name('users.store');
 
 
 Route::get('/dashboard', function () {
