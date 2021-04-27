@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,10 @@ class UserRequest extends FormRequest
         $type = '\\App\\Models\\'.ucfirst($this->request->get('type'));
         $typeable = $type::create($this->request->all());
 
+        $uuid = Str::uuid();
+
         $user = User::create([
+            'uuid' => $uuid,
             'name' => $this->request->get('name'),
             'email' => $this->request->get('email'),
             'password' => Hash::make($this->request->get('password')),
