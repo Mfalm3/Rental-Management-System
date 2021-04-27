@@ -2,10 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -37,7 +35,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'typeable_id' => $typeable->id,
-            'typeable_type' => get_class($typeable)
+            'typeable_type' => $userType
         ];
     }
 
