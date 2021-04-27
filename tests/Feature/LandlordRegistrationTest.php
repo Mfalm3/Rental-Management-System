@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class LandlordRegistrationTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker, ProvidesUtils;
     /**
      * A basic feature test example.
      *
@@ -20,20 +20,24 @@ class LandlordRegistrationTest extends TestCase
      */
     public function test_landlord_registration()
     {
-        $response = $this->json('POST','/register',[
+        $this->withoutExceptionHandling();
+        $user = $this->create_a_user('agent');
+
+        $newUser = [
             'name' => $this->faker->name,
             'email' => $this->faker->email,
             'password' => 'password',
             'password_confirmation' => 'password',
             'type' => 'landlord',
             'contacts' => '0712345678'
-        ]);
+        ];
+        $response = $this->actingAs($user,'web')->json('POST','/users/create',$newUser);
 
-        $user = User::first();
-        $landlord = Landlord::first();
+        $createdUser  = User::where('name', $newUser['name'])->first();
 
-        $this->assertNotNull($user);
-        $this->assertNotNull($landlord);
-        $this->assertEquals($user->name, $landlord->info->name);
+
+        $this->assertNotNull($createdUser);
+
+        $this->assertEquals($createdUser->typeable_type,'landlord');
     }
 }
