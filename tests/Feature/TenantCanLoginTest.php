@@ -23,15 +23,22 @@ class TenantCanLoginTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->build_a_house();
+        $user = $this->create_a_user();
 
-        $response = $this->json('POST','/register',[
+        $email = $this->faker->email;
+
+        $this->actingAs($user,'web')->json('POST','/users/create',[
             'name' => $this->faker->name,
-            'email' => $this->faker->email,
+            'email' => $email,
             'password' => 'password',
             'password_confirmation' => 'password',
             'type' => 'tenant',
             'house_id' => $this->house->id,
             'contacts' => '0712345678'
+        ]);
+        $response = $this->post('login',[
+            'email' => $email,
+            'password' => 'password'
         ]);
 
         $response->assertStatus(302);
