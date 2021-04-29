@@ -20,3 +20,6 @@
 .tab.active{
     @apply bg-blue-700 text-white font-medium;
 }
+.disabled{
+    @apply bg-gray-100;
+}
