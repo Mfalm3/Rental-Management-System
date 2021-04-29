@@ -29,6 +29,7 @@ class UserFactory extends Factory
         $typeable = $type::factory()->create()->first();
 
         return [
+            'uuid' => $this->faker->uuid,
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
