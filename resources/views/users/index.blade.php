@@ -34,16 +34,24 @@
                 <div class="tenant-panel tab-content active py-1">
                     @if($landlords->count() > 0)
                         @foreach($tenants as $tenant)
-                            <x-list-item>{{ $tenant->name }}</x-list-item>
+                            <x-list-item>
+                                <a href="{{ route('users.show',['type' => 'tenant','user' => $tenant]) }}">
+                                    {{ $tenant->name }}
+                                </a>
+                            </x-list-item>
                         @endforeach
                     @else
-                        <li>No Agent registered</li>
+                        <li>No Tenant registered</li>
                     @endif
                 </div>
                 <div class="landlord-panel tab-content py-1">
                     @if($landlords->count() > 0)
                         @foreach($landlords as $landlord)
-                            <x-list-item>{{ $landlord->name }}</x-list-item>
+                            <x-list-item>
+                                <a href="{{ route('users.show',['type' => 'landlord','user' => $landlord]) }}">
+                                    {{ $landlord->name }}
+                                </a>
+                            </x-list-item>
                         @endforeach
                     @else
                         <li>No Landlord registered</li>
@@ -52,7 +60,11 @@
                 <div class="agent-panel tab-content py-1">
                     @if($agents->count() > 0)
                         @foreach($agents as $agent)
-                            <x-list-item>{{ $agent->name }}</x-list-item>
+                            <x-list-item>
+                                <a href="{{ route('users.show',['type' => 'agent','user' => $agent]) }}">
+                                    {{ $agent->name }}
+                                </a>
+                            </x-list-item>
                         @endforeach
                     @else
                         <li>No Agent registered</li>
