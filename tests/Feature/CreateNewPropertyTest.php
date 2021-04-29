@@ -3,10 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Property;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CreateNewPropertyTest extends TestCase
@@ -19,7 +17,7 @@ class CreateNewPropertyTest extends TestCase
      */
     public function test_create_new_property()
     {
-        $user = $this->create_a_user();
+        $user = $this->create_a_user('landlord');
 
         $response = $this->actingAs($user,'web')->post('/properties',[
             'landlord_id' => $user->id,
@@ -52,6 +50,7 @@ class CreateNewPropertyTest extends TestCase
 
     public function test_see_property_creation_form()
     {
+        $this->withoutExceptionHandling();
         $user = $this->create_a_user();
 
         $response = $this->actingAs($user,'web')->get('/properties/create');

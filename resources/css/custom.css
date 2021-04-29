@@ -9,3 +9,17 @@
 .c-card:hover img {
     transform: scale(1.05);
 }
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab.active{
+    @apply bg-blue-700 text-white font-medium;
+}
+.disabled{
+    @apply bg-gray-300 cursor-not-allowed;
+}

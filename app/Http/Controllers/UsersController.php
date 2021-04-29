@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class UsersController extends Controller
 {
@@ -15,8 +16,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $tenants = User::ofType("tenant")->get();
+        $landlords = User::ofType("landlord")->get();
+        $agents = User::ofType("agent")->get();
+        return view('users.index', compact('tenants', 'landlords','agents'));
     }
 
     /**
@@ -49,9 +52,21 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type, User $user)
     {
-        //
+        switch ($type){
+            case 'tenant':
+                return view('users.tenant.index',compact('user'));
+                break;
+            case 'landlord':
+                return view('users.landlord.index',compact('user'));
+                break;
+            case 'agent':
+                return view('users.agent.index',compact('user'));
+                break;
+            default:
+                return view('users.index');
+        }
     }
 
     /**
@@ -72,9 +87,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($type, User $user)
     {
-        //
+        $data = request()->all();
+        if(Arr::exists($data, 'password')){
+            $data['password'] = bcrypt(request()->get('password'));
+        }
+        $user->update($data);
+        return redirect(route('users'))->with('message','User profile updated');
     }
 
     /**

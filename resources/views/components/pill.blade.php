@@ -8,7 +8,7 @@
              shadow-md
              hover:border hover:rounded hover:border-blue-300
              hover:shadow-xl',
-             ':class'=> '{"border-4 border-blue-400 bg-gray-200": utype=="'.$utype.'"}',
+             ':class'=> '{"bg-blue-700 text-white font-medium shadow-xs": utype=="'.$utype.'"}',
         ])
     }}>
 

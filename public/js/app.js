@@ -3795,6 +3795,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+__webpack_require__(/*! ./custom */ "./resources/js/custom.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -3825,6 +3827,39 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/custom.js":
+/*!********************************!*\
+  !*** ./resources/js/custom.js ***!
+  \********************************/
+/***/ (() => {
+
+var tabs = document.querySelectorAll(".tabs");
+var tab = document.querySelectorAll(".tab");
+var panel = document.querySelectorAll(".tab-content");
+
+function onTabClick(event) {
+  // deactivate existing active tabs and panel
+  for (var i = 0; i < tab.length; i++) {
+    tab[i].classList.remove("active");
+  }
+
+  for (var _i = 0; _i < panel.length; _i++) {
+    panel[_i].classList.remove("active");
+  } // activate new tabs and panel
+
+
+  event.target.classList.add('active');
+  var classString = event.target.getAttribute('data-target');
+  console.log(classString);
+  document.getElementById('panels').getElementsByClassName(classString)[0].classList.add("active");
+}
+
+for (var i = 0; i < tab.length; i++) {
+  tab[i].addEventListener('click', onTabClick, false);
+}
 
 /***/ }),
 
