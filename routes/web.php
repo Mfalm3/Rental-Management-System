@@ -18,27 +18,48 @@ use Illuminate\Support\Facades\URL;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+/*
+ * Serve web over https
+ */
 if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-
+/*
+ * Landing page route
+ */
 Route::get('/', function () {
     return view('landing');
 });
 
 Route::middleware(['auth'])->group(function (){
+    /*
+     * Dashboard route
+     */
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    /*
+     * Property Management routes
+     */
     Route::resource('properties',PropertyController::class);
+
+    /*
+     * User Management routes
+     */
+    Route::get('users', [UsersController::class, 'index'])->name('users');
+    Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::post('users/create', [UsersController::class, 'store'])->name('users.store');
+    Route::get('users/{type}/{user}',[UsersController::class, 'show'])->name('users.show');
+    Route::put('users/{type}/{user}',[UsersController::class, 'update'])->name('users.update');
 });
 
 
-Route::get('users', [UsersController::class, 'index']);
-Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
-Route::post('users/create', [UsersController::class, 'store'])->name('users.store');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+/*
+ * Auth routes
+ */
 require __DIR__.'/auth.php';
