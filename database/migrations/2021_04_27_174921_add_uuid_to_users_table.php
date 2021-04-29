@@ -13,8 +13,15 @@ class AddUuidToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->addColumn('uuid','uuid')->after('id');
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        Schema::table('users', function (Blueprint $table) use($driver) {
+
+            if ('sqlite' === $driver) {
+                $table->uuid('uuid')->default('');
+            } else {
+                $table->uuid('uuid')->after('id');
+            }
         });
     }
 
