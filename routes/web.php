@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdListingController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TenantController;
@@ -55,6 +56,11 @@ Route::middleware(['auth'])->group(function (){
     Route::post('users/create', [UsersController::class, 'store'])->name('users.store');
     Route::get('users/{type}/{user}',[UsersController::class, 'show'])->name('users.show');
     Route::put('users/{type}/{user}',[UsersController::class, 'update'])->name('users.update');
+
+    /*
+     * Ad Listing routes
+     */
+    Route::resource('ad', AdListingController::class);
 });
 
 
