@@ -13,6 +13,6 @@ class AdListing extends Model
 
     public function images()
     {
-        $this->morphOne(Image::class,'imageable');
+        return $this->morphOne(Image::class,'imageable');
     }
 }

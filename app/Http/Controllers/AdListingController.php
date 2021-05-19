@@ -15,7 +15,8 @@ class AdListingController extends Controller
      */
     public function index()
     {
-        return view('ad.index');
+        $ads = AdListing::all();
+        return view('ad.index', compact('ads'));
     }
 
     /**
