@@ -9,7 +9,7 @@
             <x-sidebar-item to="#" color="purple" segment="report" fontawesome="fas fa-chart-pie">Reports</x-sidebar-item>
             <x-sidebar-item to="/users" color="red" segment="users" fontawesome="fas fa-cog">Manage Users</x-sidebar-item>
             <x-sidebar-item to="#" color="green" segment="ui" fontawesome="fas fa-file">Statement</x-sidebar-item>
-            <x-sidebar-item to="/ad" color="green" segment="ui" fontawesome="fas fa-">Ad Listing</x-sidebar-item>
+            <x-sidebar-item to="/ad" color="green" segment="ui" fontawesome="fas fa-ad">Ad Listing</x-sidebar-item>
         </x-sidebar>
 
         <div id="content" class="flex-1 md:mt-16 pb-24 md:pb-5">
