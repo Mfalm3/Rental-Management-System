@@ -11,8 +11,13 @@ class AdListing extends Model
 
     protected $fillable = ['uuid', 'description', 'location', 'price', 'contact'];
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     public function images()
     {
-        return $this->morphOne(Image::class,'imageable');
+        return $this->morphMany(Image::class,'imageable');
     }
 }
