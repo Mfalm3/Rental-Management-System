@@ -6,7 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use App\Models\House;
+use App\Models\AdListing;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -32,7 +32,8 @@ if (App::environment('production')) {
  * Landing page route
  */
 Route::get('/', function () {
-    return view('landing');
+    $ads = AdListing::paginate(6);
+    return view('landing', compact('ads'));
 });
 
 Route::middleware(['auth'])->group(function (){
