@@ -1,10 +1,13 @@
 @props(['album'])
 
 <div class="absolute inset-0 h-full w-full">
-
     <div
         class="mx-auto relative"
-        x-data='{ activeSlide: 1, visible:false, images:{!! $album !!} }'
+        x-data='{
+            activeSlide: 1,
+            visible:false,
+            images: {{ json_encode($album) }},
+            slides: {{ count($album) }} }'
     >
         <!-- Slides -->
         <template x-if="images.length === 0">
@@ -12,22 +15,27 @@
                  class="absolute inset-0 h-auto w-auto object-fill pt-4" alt="Property Image">
         </template>
         <template x-if="images.length !== 0">
-            <div>
+            <div class="group">
 
-                <template x-for="image in images" :key="image.id">
+                <template x-for="(image, index) in images" :key="index">
                     <div
-                        x-show="activeSlide === image.id"
+                        x-show="activeSlide === (index + 1)"
+                        x-transition:enter="transition ease-out duration-1000"
+                        x-transition:enter-start="opacity-0 transform scale-90"
+                        x-transition:enter-end="opacity-100 transform scale-100"
                         class="p-24 font-bold text-5xl h-52 flex items-center bg-white text-white rounded-lg">
-                        <img x-show="activeSlide === image.id"
+
+                        <img x-show="activeSlide === (index + 1)"
                              :src="image.url"
-                             class="absolute inset-0 h-auto w-auto object-cover pt-4"
+                             class="absolute inset-0 h-auto w-full object-cover"
                              alt="Property Image"
                         />
                     </div>
                 </template>
 
                 <!-- Prev/Next Arrows -->
-                <div class="absolute inset-0 flex" x-show="visible">
+                <div class="absolute inset-0 flex invisible group-hover:visible"
+                     x-show="visible = images.length > 1">
                     <div class="flex items-center justify-start w-1/2">
                         <button
                             class="bg-red-600 text-teal-500 hover:text-orange-500 font-bold hover:shadow rounded-full w-12 h-12"
@@ -45,15 +53,16 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="absolute bottom-0 w-full flex items-center justify-center px-4">
-                    <template x-for="image in images" :key="image.id">
+                <div class="absolute bottom-0 w-full flex items-center justify-center p-4"
+                     x-show="visible = images.length > 1">
+                    <template x-for="(image, index) in images" :key="index">
                         <button
                             class="flex w-2 h-2 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-red-400 hover:shadow-lg"
                             :class="{
-              'bg-red-600': activeSlide === image.id,
-              'bg-gray-700': activeSlide !== image.id
-          }"
-                            x-on:click="activeSlide = image.id"
+                                       'bg-red-600': activeSlide === (index + 1),
+                                       'bg-gray-700': activeSlide !== (index + 1)
+                                     }"
+                            x-on:click="activeSlide = (index + 1)"
                         ></button>
                     </template>
                 </div>
