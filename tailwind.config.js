@@ -17,6 +17,7 @@ module.exports = {
             backgroundColor: ['checked'],
             borderColor: ['hover','checked','active'],
             textColor: ['active'],
+            visibility : ['group-hover']
         },
     },
 

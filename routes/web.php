@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdListingController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use App\Models\House;
+use App\Models\AdListing;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -31,7 +32,8 @@ if (App::environment('production')) {
  * Landing page route
  */
 Route::get('/', function () {
-    return view('landing');
+    $ads = AdListing::paginate(6);
+    return view('landing', compact('ads'));
 });
 
 Route::middleware(['auth'])->group(function (){
@@ -55,6 +57,11 @@ Route::middleware(['auth'])->group(function (){
     Route::post('users/create', [UsersController::class, 'store'])->name('users.store');
     Route::get('users/{type}/{user}',[UsersController::class, 'show'])->name('users.show');
     Route::put('users/{type}/{user}',[UsersController::class, 'update'])->name('users.update');
+
+    /*
+     * Ad Listing routes
+     */
+    Route::resource('ad', AdListingController::class);
 });
 
 
