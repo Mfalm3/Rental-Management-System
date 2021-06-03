@@ -56,7 +56,7 @@
     <!-- property listing -->
     <section>
         <div class="flex flex-wrap m-5">
-            @if(count($ads))
+            @if($ads->count())
                 @foreach($ads as $ad)
                     <x-adlistcard :ad="$ad" />
                 @endforeach
