@@ -23,6 +23,7 @@ class AdListingFactory extends Factory
     public function definition()
     {
         return [
+            'uuid'          => $this->faker->uuid(),
             'description'   => $this->faker->paragraph(3),
             'price'         => $this->faker->numberBetween(5000, 30000),
             'location'      => $this->faker->address(),
