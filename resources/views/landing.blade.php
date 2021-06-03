@@ -55,8 +55,17 @@
 
     <!-- property listing -->
     <section>
-        <div class="flex">
-
+        <div class="flex flex-wrap m-5">
+            @if(count($ads))
+                @foreach($ads as $ad)
+                    <x-adlistcard :ad="$ad" />
+                @endforeach
+                    <p class="items-center"> {{ $ads->links() }} </p>
+            @else
+                <div class="flex justify-center">
+                    <p class="text-center">No Ads posted yet</p>
+                </div>
+            @endif
         </div>
     </section>
     <!-- property listing -->
